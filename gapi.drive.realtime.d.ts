@@ -303,4 +303,66 @@ declare module gapi.drive.realtime {
          */
         isReadOnly: boolean;
     }
+
+    /**
+     * A Realtime document. A document consists of a Realtime model and a set of collaborators. Listen on the document for the following events:
+     * gapi.drive.realtime.EventType.COLLABORATOR_LEFT
+     * gapi.drive.realtime.EventType.COLLABORATOR_JOINED
+     * gapi.drive.realtime.EventType.DOCUMENT_SAVE_STATE_CHANGED
+     * This class should not be instantiated directly. The document object is generated during the document load process.
+     */
+    export class Document {
+        /**
+         * A Realtime document. A document consists of a Realtime model and a set of collaborators. Listen on the document for the following events:
+         * gapi.drive.realtime.EventType.COLLABORATOR_LEFT
+         * gapi.drive.realtime.EventType.COLLABORATOR_JOINED
+         * gapi.drive.realtime.EventType.DOCUMENT_SAVE_STATE_CHANGED
+         * This class should not be instantiated directly. The document object is generated during the document load process.
+         * @param bridge The driver for the GWT collaborative libraries.
+         * @param commService The communication service to dispose when this document is disposed.
+         * @param errorHandlerFn The third-party error handling function.
+         */
+        constructor(bridge:any, commService:Object, errorHandlerFn:Function) //TODO gapi.drive.realtime.GwtDocumentBridge gapi.drive.realtime.Document
+        /**
+         * Closes the document and disconnects from the server. After this function is called, event listeners will no longer fire and attempts to access the document, model, or model objects will throw a {@link gapi.drive.realtime.DocumentClosedError}. Calling this function after the document has been closed will have no effect.
+         */
+        close();
+
+        /**
+         * Gets an array of collaborators active in this session. Each collaborator is a jsMap with these fields: sessionId, userId, displayName, color, isMe, isAnonymous.
+         */
+        getCollaborators():any[]; //TODO Class gapi.drive.realtime.Collaborator
+        /**
+         * Gets the collaborative model associated with this document.
+         */
+        getModel():Model;
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Function, opt_capture:boolean);
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Object, opt_capture:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Function, opt_capture:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler  The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Object, opt_capture:boolean);
+    }
 }
