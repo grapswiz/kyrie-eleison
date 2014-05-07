@@ -411,4 +411,29 @@ declare module gapi.drive.realtime {
          */
         userId:string;
     }
+
+    /**
+     * An event indicating that a new collaborator has joined the document.
+     */
+    export class CollaboratorJoinedEvent {
+        /**
+         * An event indicating that a new collaborator has joined the document.
+         * @param document The document the collaborator joined.
+         * @param collaborator The collaborator that joined.
+         */
+        constructor(document:Document, collaborator:Collaborator);
+
+        /**
+         * Creates an event from serialized JSON.
+         * @param source The source object.
+         * @param serialized A serialized content object.
+         * @return A change event.
+         */
+        deserialize(source:Document, serialized:Object):CollaboratorJoinedEvent;
+
+        /**
+         * The collaborator that joined.
+         */
+        collaborator:Collaborator;
+    }
 }
