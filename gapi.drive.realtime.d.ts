@@ -436,4 +436,29 @@ declare module gapi.drive.realtime {
          */
         collaborator:Collaborator;
     }
+
+    /**
+     * An event indicating that a collaborator left the document.
+     */
+    export class CollaboratorLeftEvent {
+        /**
+         * An event indicating that a collaborator left the document.
+         * @param document The document the collaborator left.
+         * @param collaborator The collaborator that left.
+         */
+        constructor(document:Document, collaborator:Collaborator);
+
+        /**
+         * Creates an event from serialized JSON.
+         * @param source The source object.
+         * @param serialized A serialized content object.
+         * @return A collaborator left event.
+         */
+        deserialize(source:Document, serialized:Object):CollaboratorLeftEvent;
+
+        /**
+         * The collaborator that left.
+         */
+        collaborator:Collaborator;
+    }
 }
