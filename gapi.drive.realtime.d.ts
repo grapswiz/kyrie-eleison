@@ -331,7 +331,7 @@ declare module gapi.drive.realtime {
         /**
          * Gets an array of collaborators active in this session. Each collaborator is a jsMap with these fields: sessionId, userId, displayName, color, isMe, isAnonymous.
          */
-        getCollaborators():any[]; //TODO Class gapi.drive.realtime.Collaborator
+        getCollaborators():Collaborator[];
         /**
          * Gets the collaborative model associated with this document.
          */
@@ -364,5 +364,51 @@ declare module gapi.drive.realtime {
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
         removeEventListener(type:string, handler:Object, opt_capture:boolean);
+    }
+
+    /**
+     * A collaborator on the document.
+     */
+    export class Collaborator {
+        /**
+         * A collaborator on the document.
+         * @param userId The userId of the collaborator.
+         * @param sessionId The sessionId of the collaborator.
+         * @param displayName The display name of the collaborator.
+         * @param color The color associated with the collaborator.
+         * @param isMe True if the collaborator is the local user, false otherwise.
+         * @param isAnonymous True if the collaborator is anonymous, false otherwise.
+         * @param photoUrl A url that points to the profile photo of the user.
+         */
+        constructor(userId:string, sessionId:string, displayName:string, color:string, isMe:boolean, isAnonymous:boolean, photoUrl:string);
+
+        /**
+         * The color associated with the collaborator.
+         */
+        color:string;
+        /**
+         * The display name of the collaborator.
+         */
+        displayName:string;
+        /**
+         * True if the collaborator is anonymous, false otherwise.
+         */
+        isAnonymous:boolean;
+        /**
+         * True if the collaborator is the local user, false otherwise.
+         */
+        isMe:boolean;
+        /**
+         * A url that points to the profile photo of the user.
+         */
+        photoUrl:string;
+        /**
+         * The sessionId of the collaborator.
+         */
+        sessionId:string;
+        /**
+         * The userId of the collaborator.
+         */
+        userId:string;
     }
 }
