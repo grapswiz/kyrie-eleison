@@ -6,3 +6,5 @@ if (error.isFatal) {
     console.log("FATAL ERROR!!");
 }
 console.log(gapi.drive.realtime.ErrorType.CLIENT_ERROR);
+
+gapi.drive.realtime.databinding.bindString("string", <HTMLInputElement>document.getElementById("edit"));
