@@ -40,7 +40,7 @@ declare module gapi.drive.realtime {
              * @param collaborativeObject The collaborative object to bind.
              * @param domElement The DOM element to bind.
              */
-            constructor(collaborativeObject, domElement:Element); //TODO argument 1 has gapi.drive.realtime.CollaborativeObject.
+            constructor(collaborativeObject:CollaborativeObject, domElement:Element);
             /**
              * Unbinds the DOM element from the collaborative object.
              */
@@ -48,7 +48,7 @@ declare module gapi.drive.realtime {
             /**
              * The collaborative object that this registration binds to the DOM element.
              */
-            collaborativeObject: any; //TODO
+            collaborativeObject: CollaborativeObject;
             /**
              * The DOM element that this registration binds to the collaborative object.
              */
@@ -132,5 +132,56 @@ declare module gapi.drive.realtime {
          * The provided OAuth token is no longer valid and must be refreshed.
          */
         TOKEN_REFRESH_REQUIRED: string;
+    };
+
+    /**
+     * CollaborativeObject contains behavior common to all built in collaborative types. This class should not be instantiated directly. Use the create* methods on gapi.drive.realtime.Model to create specific types of collaborative objects.
+     */
+    export class CollaborativeObject {
+        /**
+         * CollaborativeObject contains behavior common to all built in collaborative types. This class should not be instantiated directly. Use the create* methods on gapi.drive.realtime.Model to create specific types of collaborative objects.
+         * @param model The document model.
+         */
+        constructor(model:any); //TODO gapi.drive.realtime.Model
+        /**
+         * The ID of the collaborative object. Readonly.
+         */
+        id:string;
+        /**
+         * Returns the object ID.
+         */
+        getId():string;
+        /**
+         * Returns a string representation of this collaborative object.
+         */
+        toString():string;
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Function, opt_capture:boolean);
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Object, opt_capture:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Function, opt_capture:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Object, opt_capture:boolean);
     }
 }
