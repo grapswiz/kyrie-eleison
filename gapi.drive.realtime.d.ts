@@ -11,7 +11,7 @@ declare module gapi.drive.realtime {
          * @param string The collaborative string to bind.
          * @param textInputElement The text input element to bind. This must be a textarea element or an input type=text element.
          */
-        function bindString(string:string, textInputElement:HTMLInputElement):any; //TODO this function returns gapi.drive.realtime.databinding.Binding
+        function bindString(string:string, textInputElement:HTMLInputElement):Binding;
         /**
          * An error that is thrown when attempting to bind a DOM element which has already been bound to a collaborative value.
          */
@@ -142,7 +142,7 @@ declare module gapi.drive.realtime {
          * CollaborativeObject contains behavior common to all built in collaborative types. This class should not be instantiated directly. Use the create* methods on gapi.drive.realtime.Model to create specific types of collaborative objects.
          * @param model The document model.
          */
-        constructor(model:any); //TODO gapi.drive.realtime.Model
+        constructor(model:Model);
         /**
          * The ID of the collaborative object. Readonly.
          */
