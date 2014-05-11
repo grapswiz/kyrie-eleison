@@ -799,4 +799,45 @@ declare module gapi.drive.realtime {
          */
         removeEventListener(type:string, handler:Object, opt_capture?:boolean);
     }
+
+    /**
+     * A base class for model events.
+     */
+    export class BaseModelEvent {
+        /**
+         * A base class for model events.
+         * @param type The event type.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param isLocal Whether this event originated in the local session.
+         * @param bubbles Whether or not this event should bubble to ancestors.
+         */
+        constructor(type:string, target:EventTarget, sessionId:string, userId:string, isLocal:boolean, bubbles:boolean);
+
+        /**
+         * Whether this event should bubble to ancestors.
+         */
+        bubbles:boolean;
+
+        /**
+         * Whether this event originated in the local session.
+         */
+        isLocal:boolean;
+
+        /**
+         * The ID of the session that initiated the event.
+         */
+        sessionId:string;
+
+        /**
+         * Event type.
+         */
+        type:string;
+
+        /**
+         * The user ID of the user that initiated the event.
+         */
+        userId:string;
+    }
 }
