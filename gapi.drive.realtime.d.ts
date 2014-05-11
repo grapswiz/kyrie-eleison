@@ -461,4 +461,142 @@ declare module gapi.drive.realtime {
          */
         collaborator:Collaborator;
     }
+
+    /**
+     * A collaborative list. A list can contain other Realtime collaborative objects, custom collaborative objects, JavaScript primitive values, or JavaScript objects that can be serialized to JSON.
+     * Changes to the list will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the following event types:
+     * gapi.drive.realtime.EventType.VALUES_ADDED
+     * gapi.drive.realtime.EventType.VALUES_REMOVED
+     * gapi.drive.realtime.EventType.VALUES_SET
+     * This class should not be instantiated directly. To create a new list, use gapi.drive.realtime.Model.prototype.createList().
+     */
+    export class CollaborativeList<T> extends CollaborativeObject {
+        /**
+         * A collaborative list. A list can contain other Realtime collaborative objects, custom collaborative objects, JavaScript primitive values, or JavaScript objects that can be serialized to JSON.
+         * Changes to the list will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the following event types:
+         * gapi.drive.realtime.EventType.VALUES_ADDED
+         * gapi.drive.realtime.EventType.VALUES_REMOVED
+         * gapi.drive.realtime.EventType.VALUES_SET
+         * This class should not be instantiated directly. To create a new list, use gapi.drive.realtime.Model.prototype.createList().
+         * @param model
+         */
+        constructor(model:Model);
+
+        /**
+         * Returns a copy of the contents of this collaborative list as a Javascript array. Changes to the returned object will not affect the original collaborative list.
+         * @return Array.<*> A copy of the contents of this collaborative list.
+         */
+        asArray():T[];
+        /**
+         * Removes all values from the list.
+         */
+        clear():void;
+
+        /**
+         * Gets the value at the given index.
+         * @param index The index.
+         * @return * The value at the given index.
+         */
+        get(index:number):T;
+
+        /**
+         * Returns the first index of the given value, or -1 if it cannot be found.
+         * @param value The value to find.
+         * @param opt_comparatorFn Optional comparator function used to determine the equality of two items.
+         * @return The index of the given value, or -1 if it cannot be found.
+         */
+        indexOf(value:T, opt_comparatorFn?:(a:T, b:T)=>boolean):number;
+
+        /**
+         * Inserts an item into the list at a given index.
+         * @param index The index to insert at.
+         * @param value The value to add.
+         */
+        insert(index:number, value:T):void;
+
+        /**
+         * Inserts a list of items into the list at a given index.
+         * @param index The index at which to insert.
+         * @param values The values to insert.
+         */
+        insertAll(index:number, values:T[]):void;
+
+        /**
+         * Returns the last index of the given value, or -1 if it cannot be found.
+         * @param value The value to find.
+         * @param opt_comparatorFn Optional comparator function used to determine the equality of two items.
+         * @return The index of the given value, or -1 if it cannot be found.
+         */
+        lastIndexOf(value:T, opt_comparatorFn?:(a:T, b:T)=>boolean):number;
+
+        /**
+         * Adds an item to the end of the list.
+         * @param value The value to add.
+         * @return The new array length.
+         */
+        push(value:T):number;
+
+        /**
+         * Adds an array of values to the end of the list.
+         * @param values The values to add.
+         */
+        pushAll(values:T[]):void;
+
+        /**
+         * Creates an IndexReference at the given index. If canBeDeleted is true, then a delete over the index will delete the reference. Otherwise the reference will shift to the beginning of the deleted range.
+         * @param index The index of the reference.
+         * @param canBeDeleted Whether this index is deleted when there is a delete of a range covering this index.
+         */
+        registerReference(index:number, canBeDeleted:boolean):any; //TODO gapi.drive.realtime.IndexReference
+
+        /**
+         * Removes the item at the given index from the list.
+         * @param index The index of the item to remove.
+         */
+        remove(index):void;
+
+        /**
+         * Removes the items between startIndex (inclusive) and endIndex (exclusive).
+         * @param startIndex The start index of the range to remove (inclusive).
+         * @param endIndex The end index of the range to remove (exclusive).
+         */
+        removeRange(startIndex:number, endIndex:number):void;
+
+        /**
+         * Removes the first instance of the given value from the list.
+         * @param value The value to remove.
+         * @return Whether the item was removed.
+         */
+        removeValue(value:T):boolean;
+
+        /**
+         * Replaces items in the list with the given items, starting at the given index.
+         * @param index The index to set at.
+         * @param values The values to insert.
+         */
+        replaceRange(index:number, values:T[]):void;
+
+        /**
+         * Sets the item at the given index
+         * @param index The index to insert at.
+         * @param value The value to set.
+         */
+        set(index:number, value:T):void;
+
+        /**
+         * Returns the object ID.
+         * @return The id.
+         */
+        getId():string;
+
+        /**
+         * The number of entries in the list. Assign to this field to reduce the size of the list. Note that the length given must be < or equal to the current size. The length of a list cannot be extended in this way.
+         */
+        length:number;
+
+        /**
+         * The ID of the collaborative object. Readonly.
+         */
+        id:string;
+    }
 }
