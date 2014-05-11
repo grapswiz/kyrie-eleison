@@ -66,7 +66,7 @@ declare module gapi.drive.realtime {
      * @param opt_initializerFn An optional initialization function that will be called before onLoaded only the first time that the document is loaded. The document's {@link gapi.drive.realtime.Model} object will be passed to this function.
      * @param opt_errorFn An optional error handling function that will be called if an error occurs while the document is being loaded or edited. A gapi.drive.realtime.Error object describing the error will be passed to this function.
      */
-    function load(field:string, onLoaded:Function, opt_initializerFn:Function, opt_errorFn:Function):void;
+    function load(field:string, onLoaded:Function, opt_initializerFn?:Function, opt_errorFn?:Function):void;
 
     /**
      * Loads a Realtime document that is appropriate for storing data that is application and user specific, such as preferences. For a given authenticated user and application, this document is guaranteed to be a singleton. If no such a document exists, it will be created in the authenticated application's hidden "Application Data" folder (if the "Application Data" folder does not exist it will be created as well). To use this function, the OAuth token must have the drive.appdata scope. See https://developers.google.com/drive/appdata for more details on the Application Data folder.
@@ -74,7 +74,7 @@ declare module gapi.drive.realtime {
      * @param opt_initializerFn
      * @param opt_errorFn
      */
-    function loadAppDataDocument(onLoaded:Function, opt_initializerFn:Function, opt_errorFn:Function):void;
+    function loadAppDataDocument(onLoaded:Function, opt_initializerFn?:Function, opt_errorFn?:Function):void;
     /**
      * An error affecting the realtime document.
      */
@@ -161,28 +161,28 @@ declare module gapi.drive.realtime {
          * @param handler The function to handle the event.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Function, opt_capture:boolean);
+        addEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
          * @param type The type of the event to listen for.
          * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Object, opt_capture:boolean);
+        addEventListener(type:string, handler:Object, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler The function to handle the event.
          * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Function, opt_capture:boolean);
+        removeEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Object, opt_capture:boolean);
+        removeEventListener(type:string, handler:Object, opt_capture?:boolean);
     }
 
     /**
@@ -207,34 +207,34 @@ declare module gapi.drive.realtime {
          * @param handler The function to handle the event.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Function, opt_capture:boolean);
+        addEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
          * @param type The type of the event to listen for.
          * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Object, opt_capture:boolean);
+        addEventListener(type:string, handler:Object, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler The function to handle the event.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Function, opt_capture:boolean);
+        removeEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler  The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Object, opt_capture:boolean);
+        removeEventListener(type:string, handler:Object, opt_capture?:boolean);
 
         /**
          * Starts a compound operation. If a name is given, that name will be recorded in the mutation for use in revision history, undo menus, etc. When beginCompoundOperation() is called, all subsequent edits to the data model will be batched together in the undo stack and revision history until endCompoundOperation() is called. Compound operations may be nested inside other compound operations. Note that the compound operation MUST start and end in the same synchronous execution block. If this invariant is violated, the data model will become invalid and all future changes will fail.
          * @param opt_name An optional name for this compound operation.
          */
-        beginCompoundOperation(opt_name:string);
+        beginCompoundOperation(opt_name?:string);
 
         /**
          * Creates and returns a new collaborative object. This can be used to create custom collaborative objects. For built in types, use the specific create* functions.
@@ -249,21 +249,21 @@ declare module gapi.drive.realtime {
          * @param opt_initialValue Initial value for the list.
          * @return A collaborative list.
          */
-        createList(opt_initialValue:any[]):Object;
+        createList(opt_initialValue?:any[]):Object;
 
         /**
          * Creates a collaborative map.
          * @param opt_initialValue Initial value for the map.
          * @return A collaborative map.
          */
-        createMap(opt_initialValue:Object):Object;
+        createMap(opt_initialValue?:Object):Object;
 
         /**
          * Creates a collaborative string.
          * @param opt_initialValue Sets the initial value for this string.
          * @return A collaborative string.
          */
-        createString(opt_initialValue:string):Object;
+        createString(opt_initialValue?:string):Object;
         /**
          * Ends a compound operation. This method will throw an exception if no compound operation is in progress.
          */
@@ -342,28 +342,28 @@ declare module gapi.drive.realtime {
          * @param handler The function to handle the event.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Function, opt_capture:boolean);
+        addEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
          * @param type The type of the event to listen for.
          * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        addEventListener(type:string, handler:Object, opt_capture:boolean);
+        addEventListener(type:string, handler:Object, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler The function to handle the event.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Function, opt_capture:boolean);
+        removeEventListener(type:string, handler:Function, opt_capture?:boolean);
         /**
          * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
          * @param type The type of the event to listen for.
          * @param handler  The handler can also be an object that implements the handleEvent method which takes the event object as argument.
          * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
          */
-        removeEventListener(type:string, handler:Object, opt_capture:boolean);
+        removeEventListener(type:string, handler:Object, opt_capture?:boolean);
     }
 
     /**
