@@ -840,4 +840,248 @@ declare module gapi.drive.realtime {
          */
         userId:string;
     }
+
+    /**
+     * Event fired when a collaborative object changes. This event will bubble to all of the ancestors of the changed object. It includes an array of events describing the specific changes.
+     */
+    export class ObjectChangedEvent extends BaseModelEvent {
+        /**
+         * Event fired when a collaborative object changes. This event will bubble to all of the ancestors of the changed object. It includes an array of events describing the specific changes.
+         * @param target The target object that generated the event.
+         * @param sessionId The source object that generated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param local Whether this event originated in the local session.
+         * @param events The events that caused the object to change.
+         */
+        constructor(target:EventTarget, sessionId:string, userId:string, local:boolean, events:BaseModelEvent[]);
+
+        /**
+         * The specific events that document the changes that occurred on the object.
+         */
+        events:BaseModelEvent[];
+    }
+
+    /**
+     * Event fired when an index reference shifts
+     */
+    export class ReferenceShiftedEvent extends BaseModelEvent {
+
+        /**
+         * Event fired when an index reference shifts
+         * @param target The reference that shifted.
+         * @param oldIndex The previous index.
+         * @param newIndex The new index.
+         * @param sessionId The ID of the session.
+         * @param userId The ID of the user.
+         * @param isLocal If the session is the local session.
+         */
+        constructor(target:EventTarget, oldIndex:number, newIndex:number, sessionId:string, userId:string, isLocal:boolean);
+
+        /**
+         * The new index.
+         */
+        newIndex:number;
+
+        /**
+         * The previous index.
+         */
+        oldIndex:number;
+    }
+
+    /**
+     * Event fired when text is removed from a string.
+     */
+    export class TextDeletedEvent extends BaseModelEvent {
+
+        /**
+         * Event fired when text is removed from a string.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param local Whether this event originated in the local session.
+         * @param index The index of the change.
+         * @param text The deleted text.
+         */
+        constructor(target:CollaborativeString, sessionId:string, userId:string, local:boolean, index:number, text:string);
+
+        /**
+         * The index of the first character that was deleted.
+         */
+        index:number;
+
+        /**
+         * The deleted text.
+         */
+        text:string;
+    }
+
+    /**
+     * Event fired when text is inserted into a string.
+     */
+    export class TextInsertedEvent extends BaseModelEvent {
+        /**
+         * Event fired when text is inserted into a string.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param local Whether this event originated in the local session.
+         * @param index The index of the change.
+         * @param text The inserted text.
+         */
+        constructor(target:CollaborativeString, sessionId:string, userId:string, local:boolean, index:number, text:string);
+
+        /**
+         * The index of the change.
+         */
+        index:number;
+
+        /**
+         * The inserted text
+         */
+        text:string;
+    }
+
+    /**
+     * An event indicating that canUndo or canRedo changed.
+     */
+    export class UndoRedoStateChangedEvent {
+
+        /**
+         * An event indicating that canUndo or canRedo changed.
+         * @param model The model whose state changed.
+         * @param canUndo True if you can currently undo.
+         * @param canRedo True if you can currently redo.
+         */
+        constructor(model:Model, canUndo:boolean, canRedo:boolean);
+
+        /**
+         * True if you can currently redo, false otherwise.
+         */
+        canRedo:boolean;
+
+        /**
+         * True if you can currently undo, false otherwise.
+         */
+        canUndo:boolean;
+    }
+
+    /**
+     * Event fired when a map or custom object property changes.
+     */
+    export class ValueChangedEvent extends BaseModelEvent {
+
+        /**
+         * Event fired when a map or custom object property changes.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param isLocal Whether this event originated in the local session.
+         * @param property The property whose value changed.
+         * @param newValue The new property value.
+         * @param oldValue The old property value.
+         */
+        constructor(target:EventTarget, sessionId:string, userId:string, isLocal:boolean, property:string, newValue:any, oldValue:any);
+
+        /**
+         * The new property value.
+         */
+        newValue:any;
+
+        /**
+         * The old property value.
+         */
+        oldValue:any;
+
+        /**
+         * The property whose value changed.
+         */
+        property:string;
+    }
+
+    /**
+     * Event fired when items are added to a collaborative list.
+     */
+    export class ValuesAddedEvent extends BaseModelEvent {
+
+        /**
+         * Event fired when items are added to a collaborative list.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param isLocal Whether this event originated in the local session.
+         * @param index The index where values were added.
+         * @param values The values added.
+         */
+        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
+
+        /**
+         * The index of the first added value.
+         */
+        index:number;
+
+        /**
+         * The values that were added.
+         */
+        values:any[];
+    }
+
+    /**
+     * Event fired when items are removed from a collaborative list.
+     */
+    export class ValuesRemovedEvent extends BaseModelEvent {
+
+        /**
+         * Event fired when items are removed from a collaborative list.
+         * @param target The target object that generated the event.
+         * @param sessionId The ID of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param isLocal Whether this event originated in the local session.
+         * @param index The index where values were removed.
+         * @param values The values removed.
+         */
+        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
+
+        /**
+         * The index of the first removed value.
+         */
+        index:number;
+
+        /**
+         * The values that were removed.
+         */
+        values:any[];
+    }
+
+    /**
+     * Event fired when items in a collaborative list are changed in place.
+     */
+    export class ValuesSetEvent extends BaseModelEvent {
+
+        /**
+         *
+         * @param target The target object that generated the event.
+         * @param sessionId The is of the session that initiated the event.
+         * @param userId The user ID of the user that initiated the event.
+         * @param isLocal Whether this event originated in the local session.
+         * @param index The index of the change.
+         * @param oldValues The old values.
+         * @param newValues The new values.
+         */
+        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, oldValues:any[], newValues:any[]);
+
+        /**
+         * The index of the first value that was replaced.
+         */
+        index:number;
+
+        /**
+         * The new values.
+         */
+        newValues:any[];
+
+        /**
+         * The old values.
+         */
+        oldValues:any[];
+    }
 }
