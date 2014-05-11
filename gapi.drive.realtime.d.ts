@@ -666,4 +666,68 @@ declare module gapi.drive.realtime {
          */
         size:number;
     }
+
+    /**
+     * Creates a new collaborative string. Unlike regular JavaScript strings, collaborative strings are mutable.
+     * Changes to the string will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the following event types:
+     * gapi.drive.realtime.EventType.TEXT_INSERTED
+     * gapi.drive.realtime.EventType.TEXT_DELETED
+     * This class should not be instantiated directly. To create a new collaborative string, use gapi.drive.realtime.Model.prototype.createString
+     */
+    export class CollaborativeString extends CollaborativeObject {
+        /**
+         * * Creates a new collaborative string. Unlike regular JavaScript strings, collaborative strings are mutable.
+         * Changes to the string will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the following event types:
+         * gapi.drive.realtime.EventType.TEXT_INSERTED
+         * gapi.drive.realtime.EventType.TEXT_DELETED
+         * This class should not be instantiated directly. To create a new collaborative string, use gapi.drive.realtime.Model.prototype.createString
+         * @param model The document model.
+         */
+        constructor(model:Model);
+
+        /**
+         * Appends a string to the end of this one.
+         * @param text The new text to append.
+         */
+        append(text:string);
+
+        /**
+         * Gets a string representation of the collaborative string.
+         * @return A string representation of the collaborative string.
+         */
+        getText():string;
+
+        /**
+         * Inserts a string into the collaborative string at a specific index.
+         * @param index The index to insert at.
+         * @param text The new text to insert.
+         */
+        insertString(index:number, text:string):void;
+
+        /**
+         * Creates an IndexReference at the given {@code index}. If {@code canBeDeleted} is set, then a delete over the index will delete the reference. Otherwise the reference will shift to the beginning of the deleted range.
+         * @param index The index of the reference.
+         * @param canBeDeleted Whether this index is deleted when there is a delete of a range covering this index.
+         * @return The newly registered reference.
+         */
+        registerReference(index:number, canBeDeleted:boolean):any; //TODO gapi.drive.realtime.IndexReference
+
+        /**
+         * Deletes the text between startIndex (inclusive) and endIndex (exclusive).
+         * @param startIndex The start index of the range to delete (inclusive).
+         * @param endIndex The end index of the range to delete (exclusive).
+         */
+        removeRange(startIndex:number, endIndex:number):void;
+
+        /**
+         * Sets the contents of this collaborative string. Note that this method performs a text diff between the current string contents and the new contents so that the string will be modified using the minimum number of text inserts and deletes possible to change the current contents to the newly-specified contents.
+         * @param text The new value of the string.
+         */
+        setText(text:string):void;
+
+        /**
+         * The length of the string. Read only.
+         */
+        length:number;
+    }
 }
