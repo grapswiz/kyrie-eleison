@@ -200,7 +200,7 @@ declare module gapi.drive.realtime {
          * @param bridge The driver for the GWT collaborative libraries.
          * @param document The document that this model belongs to.
          */
-        constructor(bridge:any, document:any); //TODO gapi.drive.realtime.GwtDocumentBridge gapi.drive.realtime.Document
+        constructor(bridge:any, document:Document); //TODO gapi.drive.realtime.GwtDocumentBridge
         /**
          * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
          * @param type The type of the event to listen for.
@@ -272,7 +272,7 @@ declare module gapi.drive.realtime {
          * Returns the root of the object model.
          * @return The root of the object model.
          */
-        getRoot():any; //TODO gapi.drive.realtime.CollaborativeMap
+        getRoot():CollaborativeMap<any>;
         /**
          * Returns whether the model is initialized.
          * @return Whether the model is initialized.
@@ -322,7 +322,7 @@ declare module gapi.drive.realtime {
          * @param commService The communication service to dispose when this document is disposed.
          * @param errorHandlerFn The third-party error handling function.
          */
-        constructor(bridge:any, commService:Object, errorHandlerFn:Function) //TODO gapi.drive.realtime.GwtDocumentBridge gapi.drive.realtime.Document
+        constructor(bridge:any, commService:Object, errorHandlerFn:Function) //TODO gapi.drive.realtime.GwtDocumentBridge
         /**
          * Closes the document and disconnects from the server. After this function is called, event listeners will no longer fire and attempts to access the document, model, or model objects will throw a {@link gapi.drive.realtime.DocumentClosedError}. Calling this function after the document has been closed will have no effect.
          */
@@ -1036,7 +1036,7 @@ declare module gapi.drive.realtime {
     /**
      * Event fired when items are added to a collaborative list.
      */
-    export class ValuesAddedEvent extends BaseModelEvent {
+    export class ValuesAddedEvent<T> extends BaseModelEvent {
 
         /**
          * Event fired when items are added to a collaborative list.
@@ -1047,7 +1047,7 @@ declare module gapi.drive.realtime {
          * @param index The index where values were added.
          * @param values The values added.
          */
-        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
+        constructor(target:CollaborativeList<T>, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
 
         /**
          * The index of the first added value.
@@ -1063,7 +1063,7 @@ declare module gapi.drive.realtime {
     /**
      * Event fired when items are removed from a collaborative list.
      */
-    export class ValuesRemovedEvent extends BaseModelEvent {
+    export class ValuesRemovedEvent<T> extends BaseModelEvent {
 
         /**
          * Event fired when items are removed from a collaborative list.
@@ -1074,7 +1074,7 @@ declare module gapi.drive.realtime {
          * @param index The index where values were removed.
          * @param values The values removed.
          */
-        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
+        constructor(target:CollaborativeList<T>, sessionId:string, userId:string, isLocal:boolean, index:number, values:any[]);
 
         /**
          * The index of the first removed value.
@@ -1090,7 +1090,7 @@ declare module gapi.drive.realtime {
     /**
      * Event fired when items in a collaborative list are changed in place.
      */
-    export class ValuesSetEvent extends BaseModelEvent {
+    export class ValuesSetEvent<T> extends BaseModelEvent {
 
         /**
          *
@@ -1102,7 +1102,7 @@ declare module gapi.drive.realtime {
          * @param oldValues The old values.
          * @param newValues The new values.
          */
-        constructor(target:CollaborativeList, sessionId:string, userId:string, isLocal:boolean, index:number, oldValues:any[], newValues:any[]);
+        constructor(target:CollaborativeList<T>, sessionId:string, userId:string, isLocal:boolean, index:number, oldValues:any[], newValues:any[]);
 
         /**
          * The index of the first value that was replaced.
