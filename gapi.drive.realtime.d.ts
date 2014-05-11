@@ -760,4 +760,43 @@ declare module gapi.drive.realtime {
          */
         referencedObject:CollaborativeObject;
     }
+
+    /**
+     * An event target which can dispatch events to interested listeners. Listeners subscribe via addEventListener.
+     */
+    export class EventTarget {
+        /**
+         * An event target which can dispatch events to interested listeners. Listeners subscribe via addEventListener.
+         */
+        constructor();
+
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Function, opt_capture?:boolean);
+        /**
+         * Adds an event listener to the event target. The same handler can only be added once per the type. Even if you add the same handler multiple times using the same type then it will only be called once when the event is dispatched.
+         * @param type The type of the event to listen for.
+         * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        addEventListener(type:string, handler:Object, opt_capture?:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler The function to handle the event.
+         * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Function, opt_capture?:boolean);
+        /**
+         * Removes an event listener from the event target. The handler must be the same object as the one added. If the handler has not been added then nothing is done.
+         * @param type The type of the event to listen for.
+         * @param handler The handler can also be an object that implements the handleEvent method which takes the event object as argument.
+         * @param opt_capture  In DOM-compliant browsers, this determines whether the listener is fired during the capture or bubble phase of the event.
+         */
+        removeEventListener(type:string, handler:Object, opt_capture?:boolean);
+    }
 }
