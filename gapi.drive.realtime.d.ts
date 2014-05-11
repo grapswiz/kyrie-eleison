@@ -584,20 +584,9 @@ declare module gapi.drive.realtime {
         set(index:number, value:T):void;
 
         /**
-         * Returns the object ID.
-         * @return The id.
-         */
-        getId():string;
-
-        /**
          * The number of entries in the list. Assign to this field to reduce the size of the list. Note that the length given must be < or equal to the current size. The length of a list cannot be extended in this way.
          */
         length:number;
-
-        /**
-         * The ID of the collaborative object. Readonly.
-         */
-        id:string;
     }
 
     /**
