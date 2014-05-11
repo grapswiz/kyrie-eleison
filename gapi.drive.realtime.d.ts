@@ -367,6 +367,41 @@ declare module gapi.drive.realtime {
     }
 
     /**
+     * An error that is thrown when attempting to access a closed document (or any model or collaborative object associated with a closed document).
+     */
+    export class DocumentClosedError {
+
+        /**
+         * An error that is thrown when attempting to access a closed document (or any model or collaborative object associated with a closed document).
+         */
+        constructor();
+    }
+
+    /**
+     * An event that indicates that the save state of a document has changed. If both isSaving and isPending are false, the document is completely saved and up to date.
+     */
+    export class DocumentSaveStateChangedEvent {
+
+        /**
+         * An event that indicates that the save state of a document has changed. If both isSaving and isPending are false, the document is completely saved and up to date.
+         * @param document The document being saved.
+         * @param isSaving The saving state.
+         * @param isPending The state of pending mutations.
+         */
+        constructor(document:Document, isSaving:boolean, isPending:boolean);
+
+        /**
+         * If true, the client has mutations that have not yet been sent to the server. If false, all mutations have been sent to the server, but some may not yet have been acked.
+         */
+        isPending:boolean;
+
+        /**
+         * If true, the document is in the process of saving. Mutations have been sent to the server, but we have not yet received an ack. If false, nothing is in the process of being sent.
+         */
+        isSaving:boolean;
+    }
+
+    /**
      * A collaborator on the document.
      */
     export class Collaborator {
