@@ -547,7 +547,7 @@ declare module gapi.drive.realtime {
          * @param index The index of the reference.
          * @param canBeDeleted Whether this index is deleted when there is a delete of a range covering this index.
          */
-        registerReference(index:number, canBeDeleted:boolean):any; //TODO gapi.drive.realtime.IndexReference
+        registerReference(index:number, canBeDeleted:boolean):IndexReference;
 
         /**
          * Removes the item at the given index from the list.
@@ -710,7 +710,7 @@ declare module gapi.drive.realtime {
          * @param canBeDeleted Whether this index is deleted when there is a delete of a range covering this index.
          * @return The newly registered reference.
          */
-        registerReference(index:number, canBeDeleted:boolean):any; //TODO gapi.drive.realtime.IndexReference
+        registerReference(index:number, canBeDeleted:boolean):IndexReference;
 
         /**
          * Deletes the text between startIndex (inclusive) and endIndex (exclusive).
@@ -729,5 +729,35 @@ declare module gapi.drive.realtime {
          * The length of the string. Read only.
          */
         length:number;
+    }
+
+    /**
+     * An IndexReference is a pointer to a specific location in a collaborative list or string. This pointer automatically shifts as new elements are added to and removed from the object.
+     * To listen for changes to the referenced index, add an EventListener for gapi.drive.realtime.EventType.REFERENCE_SHIFTED.
+     * This class should not be instantiated directly. To create an index reference, call registerReference on the appropriate string or list.
+     */
+    export class IndexReference extends CollaborativeObject {
+        /**
+         * An IndexReference is a pointer to a specific location in a collaborative list or string. This pointer automatically shifts as new elements are added to and removed from the object.
+         * To listen for changes to the referenced index, add an EventListener for gapi.drive.realtime.EventType.REFERENCE_SHIFTED.
+         * This class should not be instantiated directly. To create an index reference, call registerReference on the appropriate string or list.
+         * @param model The document model.
+         */
+        constructor(model:Model);
+
+        /**
+         * Whether this reference can be deleted. Read-only. This property affects the behavior of the index reference when the index the reference points to is deleted. If this is true, the index reference will be deleted. If it is false, the index reference will move to point at the beginning of the deleted range.
+         */
+        canBeDeleted:number;
+
+        /**
+         * The index of the current location the reference points to. Write to this property to change the referenced index.
+         */
+        index:number;
+
+        /**
+         * The object this reference points to. Read-only.
+         */
+        referencedObject:CollaborativeObject;
     }
 }
