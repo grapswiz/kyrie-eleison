@@ -599,4 +599,82 @@ declare module gapi.drive.realtime {
          */
         id:string;
     }
+
+    /**
+     * A collaborative map. A map's key must be a string. The values can contain other Realtime collaborative objects, custom collaborative objects, JavaScript primitive values or JavaScript objects that can be serialized to JSON.
+     * Changes to the map will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the gapi.drive.realtime.EventType.VALUE_CHANGED event type.
+     * This class should not be instantiated directly. To create a new map, use gapi.drive.realtime.Model.prototype.createMap().
+     */
+    export class CollaborativeMap<T> extends CollaborativeObject {
+        /**
+         * * A collaborative map. A map's key must be a string. The values can contain other Realtime collaborative objects, custom collaborative objects, JavaScript primitive values or JavaScript objects that can be serialized to JSON.
+         * Changes to the map will automatically be synced with the server and other collaborators. To listen for changes, add EventListeners for the gapi.drive.realtime.EventType.VALUE_CHANGED event type.
+         * This class should not be instantiated directly. To create a new map, use gapi.drive.realtime.Model.prototype.createMap().
+         * @param model The document model.
+         */
+        constructor(model:Model);
+
+        /**
+         * Removes all entries.
+         */
+        clear();
+
+        /**
+         * Removes the entry for the given key (if such an entry exists).
+         * @param key The key to unmap.
+         * @return The value that was mapped to this key, or null if there was no existing value.
+         */
+        delete(key:string):T;
+
+        /**
+         * Returns the value mapped to the given key.
+         * @param key The key to look up.
+         * @return The value mapped to the given key.
+         */
+        get(key):T;
+
+        /**
+         * Checks if this map contains an entry for the given key.
+         * @param key The key to check.
+         * @return Returns true if this map contains a mapping for the given key.
+         */
+        has(key):boolean;
+
+        /**
+         * Returns whether this map is empty.
+         * @return Returns true if this map is empty.
+         */
+        isEmpty():boolean;
+
+        /**
+         * Returns an array containing a copy of the items in this map. Modifications to the returned array do not modify this collaborative map.
+         * @return The items in this map. Each item is a [key, value] pair.
+         */
+        items():any; //FIXME
+
+        /**
+         * Returns an array containing a copy of the keys in this map. Modifications to the returned array do not modify this collaborative map.
+         * @return The keys in this map.
+         */
+        keys():string[];
+
+        /**
+         * Put the value into the map with the given key, overwriting an existing value for that key.
+         * @param key The map key.
+         * @param value The map value.
+         * @return The old map value, if any, that used to be mapped to the given key.
+         */
+        set(key:string, value:T):T;
+
+        /**
+         * Returns an array containing a copy of the values in this map. Modifications to the returned array do not modify this collaborative map.
+         * @return The values in this map.
+         */
+        values():T[];
+
+        /**
+         * The number of keys in the map.
+         */
+        size:number;
+    }
 }
